@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека - Главная</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 25px;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:first-child {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .nav-links a:last-child {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .add-book-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background-color: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .books-container {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .book-card {
+            background: white;border-radius: 10px;
+            padding: 15px 20px;
+            margin: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-left: 5px solid #667eea;
+        }
+
+        .book-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .book-info {
+            flex-grow: 1;
+        }
+
+        .book-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .book-author {
+            color: #666;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .book-author::before {
+            content: "✍";
+            font-size: 14px;
+        }
+
+        .book-id {
+            background-color: #e9ecef;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #666;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-style: italic;
+            font-size: 16px;
+        }
+
+        .empty-state::before {
+            content: "";
+            display: block;
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        #message {
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .message-success {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-error {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .stats {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            color: #495057;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .stats span {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        @media (max-width: 600px) {
+            .input-group {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-direction: column;
+            }
+
+            .book-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .book-id {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2> Библиотека</h2>
+
+        <div class="nav-links">
+            <a href="http://127.0.0.1:8000/">
+                <span></span> Главная страница
+            </a>
+            <a href="http://localhost:63342/PythonProject5/templates/del.html" target="_blank">
+                <span></span> Страница удаления книг
+            </a>
+        </div><div class="add-book-section">
+            <h3> Добавить новую книгу</h3>
+            <div class="input-group">
+                <input type="text" id="title" placeholder="Название книги" autocomplete="off">
+                <input type="text" id="author" placeholder="Автор книги" autocomplete="off">
+                <button onclick="addBook()">
+                    <span></span> Добавить книгу
+                </button>
+            </div>
+        </div>
+
+        <div class="books-container">
+            <h3>Список книг</h3>
+            <div id="booksList">
+                {% if books %}
+                    {% for book in books %}
+                    <div class="book-card">
+                        <div class="book-info">
+                            <div class="book-title">{{ book.title }}</div>
+                            <div class="book-author">{{ book.author }}</div>
+                            <span class="book-id">ID: {{ book.id }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        В библиотеке пока нет книг
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="stats">
+                Всего книг в библиотеке: <span>{{ books|length }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="message"></div>
+
+    <script>
+        async function addBook() {
+            const title = document.getElementById('title').value.trim();
+            const author = document.getElementById('author').value.trim();
+
+            if (!title || !author) {
+                showMessage(' Заполните все поля', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/books', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ title, author })
+                });
+
+                if (response.ok) {
+                    showMessage(' Книга успешно добавлена!', 'success');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    const error = await response.json();
+                    showMessage(error.message || ' Ошибка при добавлении', 'error');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                showMessage('Ошибка при добавлении книги', 'error');
+            }
+        }
+
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = type === 'success' ? 'message-success' : 'message-error';
+            messageDiv.style.display = 'block';
+
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Добавляем возможность добавления по Enter
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const inputs = ['title', 'author'];
+                const activeElement = document.activeElement;
+
+                if (inputs.includes(activeElement.id)) {
+                    const nextIndex = inputs.indexOf(activeElement.id) + 1;
+                    if (nextIndex < inputs.length) {
+                        document.getElementById(inputs[nextIndex]).focus();
+                    } else {
+                        addBook();
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
