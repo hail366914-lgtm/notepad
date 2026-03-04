@@ -43,7 +43,6 @@
             }
         }
 
-        /* Шапка страницы */
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -65,12 +64,10 @@
             font-size: 16px;
         }
 
-        /* Основной контент */
         .content {
             padding: 30px;
         }
 
-        /* Поиск */
         .search-section {
             margin-bottom: 30px;
         }
@@ -111,7 +108,6 @@
             transform: scale(1.02);
         }
 
-        /* Статистика */
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -148,7 +144,6 @@
             font-size: 14px;
         }
 
-        /* Список книг */
         .books-list {
             display: flex;
             flex-direction: column;
@@ -164,7 +159,7 @@
         }
 
         .books-list::-webkit-scrollbar-track {
-        background: #f1f1f1;
+            background: #f1f1f1;
             border-radius: 10px;
         }
 
@@ -177,7 +172,6 @@
             background: #555;
         }
 
-        /* Карточка книги */
         .book-card {
             background: white;
             border: 1px solid #e0e0e0;
@@ -218,7 +212,6 @@
             }
         }
 
-        /* Обложка книги */
         .book-cover {
             width: 80px;
             height: 100px;
@@ -232,7 +225,6 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
 
-        /* Информация о книге */
         .book-info {
             flex: 1;
         }
@@ -253,29 +245,6 @@
             gap: 5px;
         }
 
-        .book-year {
-            color: #999;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .book-tags {
-            display: flex;
-            gap: 10px;
-            margin-top: 8px;
-        }
-
-        .tag {
-            background: #f0f0f0;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #666;
-        }
-
-        /* Кнопка удаления */
         .delete-btn {
             background: linear-gradient(135deg, #ff6b6b, #ee5253);
             color: white;
@@ -290,26 +259,6 @@
             font-size: 20px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(238, 82, 83, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .delete-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .delete-btn:hover::before {
-            width: 100px;
-            height: 100px;
         }
 
         .delete-btn:hover {
@@ -317,7 +266,6 @@
             box-shadow: 0 6px 20px rgba(238, 82, 83, 0.5);
         }
 
-        /* Модальное окно подтверждения */
         .modal {
             display: none;
             position: fixed;
@@ -326,7 +274,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-        justify-content: center;
+            justify-content: center;
             align-items: center;
             z-index: 1000;
             animation: fadeIn 0.3s ease;
@@ -412,7 +360,6 @@
             transform: scale(1.05);
         }
 
-        /* Уведомления */
         .notification {
             position: fixed;
             bottom: 30px;
@@ -477,41 +424,6 @@
             color: #333;
         }
 
-        /* Фильтры */
-        .filters {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: #f5f5f5;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            color: #666;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .filter-btn.active {
-            background: #667eea;
-            color: white;
-        }
-
-        .filter-btn:hover {
-            background: #e0e0e0;
-        }
-        .filter-btn.active:hover {
-            background: #5a67d8;
-        }
-
-        /* Кнопка "Выбрать все" */
         .select-all {
             display: flex;
             align-items: center;
@@ -557,7 +469,6 @@
             cursor: not-allowed;
         }
 
-        /* Пустое состояние */
         .empty-state {
             text-align: center;
             padding: 50px 20px;
@@ -579,6 +490,26 @@
         .empty-state p {
             color: #666;
         }
+
+        .back-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: #5a67d8;
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body>
@@ -592,7 +523,6 @@
         </div>
 
         <div class="content">
-
             <div class="search-section">
                 <div class="search-box">
                     <input type="text" id="searchInput" placeholder="Поиск по названию или автору...">
@@ -602,7 +532,6 @@
                     </button>
                 </div>
             </div>
-
 
             <div class="stats">
                 <div class="stat-card">
@@ -619,34 +548,7 @@
                     <div class="stat-number" id="totalAuthors">0</div>
                     <div class="stat-label">Авторов</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-tag"></i>
-                    </div>
-                    <div class="stat-number" id="totalGenres">0</div>
-                    <div class="stat-label">Жанров</div>
-                </div>
             </div>
-
-
-            <div class="filters">
-                <button class="filter-btn active" onclick="filterBooks('all')">
-                    <i class="fas fa-list"></i>
-                    Все
-                </button>
-                <button class="filter-btn" onclick="filterBooks('classic')">
-                    <i class="fas fa-scroll"></i>
-                    Классика
-                </button>
-                <button class="filter-btn" onclick="filterBooks('modern')">
-                    <i class="fas fa-rocket"></i>
-                    Современное
-                </button>
-                <button class="filter-btn" onclick="filterBooks('fantasy')"><i class="fas fa-dragon"></i>
-                    Фэнтези
-                </button>
-            </div>
-
 
             <div class="select-all">
                 <input type="checkbox" id="selectAllCheckbox" onchange="toggleSelectAll()">
@@ -657,19 +559,16 @@
                 </button>
             </div>
 
-
             <div class="books-list" id="booksList"></div>
 
-
             <div style="text-align: center; margin-top: 30px;">
-                <button onclick="goBack()" style="background: #667eea; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 16px; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+                <a href="/" class="back-btn">
                     <i class="fas fa-arrow-left"></i>
                     Вернуться в библиотеку
-                </button>
+                </a>
             </div>
         </div>
     </div>
-
 
     <div class="modal" id="confirmModal">
         <div class="modal-content">
@@ -691,30 +590,27 @@
         </div>
     </div>
 
-
     <div id="notification" class="notification" style="display: none;"></div>
 
     <script>
-
-        let books = [
-            { id: 1, title: 'Война и мир', author: 'Лев Толстой', year: 1869, genre: 'Классика', tags: ['роман', 'исторический'] },
-            { id: 2, title: 'Преступление и наказание', author: 'Федор Достоевский', year: 1866, genre: 'Классика', tags: ['роман', 'психологический'] },
-            { id: 3, title: 'Мастер и Маргарита', author: 'Михаил Булгаков', year: 1967, genre: 'Классика', tags: ['роман', 'мистика'] },
-            { id: 4, title: '1984', author: 'Джордж Оруэлл', year: 1949, genre: 'Современное', tags: ['антиутопия'] },
-            { id: 5, title: 'Гарри Поттер', author: 'Дж.К. Роулинг', year: 1997, genre: 'Фэнтези', tags: ['фэнтези', 'приключения'] },
-            { id: 6, title: 'Властелин колец', author: 'Дж.Р.Р. Толкин', year: 1954, genre: 'Фэнтези', tags: ['фэнтези', 'эпический'] }
-        ];
-
+        let books = [];
         let selectedBooks = new Set();
-        let currentFilter = 'all';
         let bookToDelete = null;
 
-
         document.addEventListener('DOMContentLoaded', function() {
-            displayBooks();
-            updateStats();
+            loadBooks();
         });
 
+        async function loadBooks() {
+            try {
+                const response = await fetch('/api/books');
+                books = await response.json();
+                displayBooks();
+                updateStats();
+            } catch (error) {
+                showNotification('Ошибка при загрузке книг', 'error');
+            }
+        }
 
         function displayBooks() {
             const booksList = document.getElementById('booksList');
@@ -722,19 +618,12 @@
 
             let filteredBooks = books;
 
-
             if (searchTerm) {
                 filteredBooks = filteredBooks.filter(book =>
                     book.title.toLowerCase().includes(searchTerm) ||
                     book.author.toLowerCase().includes(searchTerm)
                 );
             }
-
-
-            if (currentFilter !== 'all') {
-                filteredBooks = filteredBooks.filter(book =>
-                    book.genre.toLowerCase() === currentFilter.toLowerCase()
-                );}
 
             if (filteredBooks.length === 0) {
                 booksList.innerHTML = `
@@ -748,7 +637,7 @@
             }
 
             booksList.innerHTML = filteredBooks.map(book => `
-                <div class="book-card" id="book-${book.id}" data-genre="${book.genre}">
+                <div class="book-card" id="book-${book.id}">
                     <div class="book-cover">
                         <i class="fas fa-book"></i>
                     </div>
@@ -761,14 +650,6 @@
                             <i class="fas fa-user"></i>
                             ${book.author}
                         </div>
-                        <div class="book-year">
-                            <i class="fas fa-calendar"></i>
-                            ${book.year} г.
-                        </div>
-                        <div class="book-tags">
-                            <span class="tag">${book.genre}</span>
-                            ${book.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                        </div>
                     </div>
                     <button class="delete-btn" onclick="openDeleteModal(${book.id})">
                         <i class="fas fa-trash"></i>
@@ -779,28 +660,15 @@
             updateSelectAllCheckbox();
         }
 
-
         function updateStats() {
             document.getElementById('totalBooks').textContent = books.length;
             const uniqueAuthors = new Set(books.map(book => book.author)).size;
             document.getElementById('totalAuthors').textContent = uniqueAuthors;
-            const uniqueGenres = new Set(books.map(book => book.genre)).size;
-            document.getElementById('totalGenres').textContent = uniqueGenres;
         }
-
 
         function searchBooks() {
             displayBooks();
         }
-
-
-        function filterBooks(filter) {
-            currentFilter = filter;
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            displayBooks();
-        }
-
 
         function toggleBookSelection(bookId) {
             if (selectedBooks.has(bookId)) {
@@ -811,7 +679,6 @@
             updateDeleteSelectedButton();
             updateSelectAllCheckbox();
         }
-
 
         function toggleSelectAll() {
             const selectAllCheckbox = document.getElementById('selectAllCheckbox');
@@ -824,73 +691,83 @@
             updateDeleteSelectedButton();
         }
 
-
         function updateSelectAllCheckbox() {
             const selectAllCheckbox = document.getElementById('selectAllCheckbox');
             selectAllCheckbox.checked = selectedBooks.size === books.length && books.length > 0;
         }
-
 
         function updateDeleteSelectedButton() {
             const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
             deleteSelectedBtn.disabled = selectedBooks.size === 0;
         }
 
-
-        function deleteSelectedBooks() {
+        async function deleteSelectedBooks() {
             if (selectedBooks.size === 0) return;
 
             bookToDelete = Array.from(selectedBooks);
-            document.getElementById('modalMessage').textContent =
-                Вы уверены, что хотите удалить ${selectedBooks.size} книг?;
+            document.getElementById('modalMessage').textContent = `Вы уверены, что хотите удалить ${selectedBooks.size} книг?`;
             document.getElementById('confirmModal').classList.add('active');
         }
-
 
         function openDeleteModal(bookId) {
             bookToDelete = bookId;
             const book = books.find(b => b.id === bookId);
-            document.getElementById('modalMessage').textContent =
-                Вы уверены, что хотите удалить книгу "${book.title}"?;
+            document.getElementById('modalMessage').textContent = `Вы уверены, что хотите удалить книгу "${book.title}"?`;
             document.getElementById('confirmModal').classList.add('active');
         }
-
 
         function closeModal() {
             document.getElementById('confirmModal').classList.remove('active');
             bookToDelete = null;
         }
 
+        async function confirmDelete() {
+            try {
+                if (Array.isArray(bookToDelete)) {
+                    const response = await fetch('/api/books', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ book_ids: bookToDelete })
+                    });
 
-        function confirmDelete() {
-            if (Array.isArray(bookToDelete)) {
-                // Удаление нескольких книг
-                books = books.filter(book => !bookToDelete.includes(book.id));
-                selectedBooks.clear();
-                showNotification(`Успешно удалено ${bookToDelete.length} книг`, 'success');
-            } else {
+                    if (response.ok) {
+                        books = books.filter(book => !bookToDelete.includes(book.id));
+                        selectedBooks.clear();
+                        showNotification(`Успешно удалено ${bookToDelete.length} книг`, 'success');
+                    }
+                } else {
+                    const response = await fetch(`/api/books/${bookToDelete}`, {
+                        method: 'DELETE'
+                    });
 
-                const bookElement = document.getElementById(`book-${bookToDelete}`);
-                bookElement.classList.add('deleted');
+                    if (response.ok) {
+                        const bookElement = document.getElementById(`book-${bookToDelete}`);
+                        bookElement.classList.add('deleted');
 
-                setTimeout(() => {
-                    books = books.filter(book => book.id !== bookToDelete);
-                    selectedBooks.delete(bookToDelete);
-                    displayBooks();
-                    showNotification('Книга успешно удалена', 'success');
-                }, 500);
+                        setTimeout(() => {
+                            books = books.filter(book => book.id !== bookToDelete);
+                            selectedBooks.delete(bookToDelete);
+                            displayBooks();
+                            showNotification('Книга успешно удалена', 'success');
+                        }, 500);
+                    }
+                }
+
+                closeModal();
+                updateStats();
+                updateDeleteSelectedButton();
+            } catch (error) {
+                showNotification('Ошибка при удалении', 'error');
+                closeModal();
             }
-
-            closeModal();
-            updateStats();
-            updateDeleteSelectedButton();
         }
-
 
         function showNotification(message, type) {
             const notification = document.getElementById('notification');
             notification.style.display = 'flex';
-            notification.className = notification ${type};
+            notification.className = `notification ${type}`;
             notification.innerHTML = `
                 <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
                 <span class="notification-message">${message}</span>
@@ -904,17 +781,10 @@
             }, 3000);
         }
 
-
         function closeNotification() {
             const notification = document.getElementById('notification');
             notification.style.display = 'none';
         }
-
-
-        function goBack() {
-            window.location.href = 'library.html'; // Замените на URL вашей библиотеки
-        }
-
 
         document.getElementById('searchInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
