@@ -1,4 +1,4 @@
-imimport json
+import json
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
@@ -107,3 +107,4 @@ def delete_multiple_books(request: DeleteBooksRequest):
     books = [b for b in books if b["id"] not in request.book_ids]
     save_books(books)
     return {"success": True, "message": f"Успешно удалено {len(request.book_ids)} книг"}
+
