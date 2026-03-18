@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль - NewsPortal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .navbar {
+            background-color: #ffffff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #0066cc;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0066cc;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            color: #0066cc;
+            background-color: #f0f7ff;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .profile-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, #0066cc, #004d99);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #0066cc;
+            border: 3px solid white;
+        }
+        
+        .profile-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-info {
+            padding: 2rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            flex: 0 0 120px;
+            font-weight: 600;
+            color: #0066cc;
+        }
+        
+        .info-value {
+            flex: 1;
+            color: #555;
+        }
+        
+        .info-value.password {
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+        
+        .btn-logout {
+            display: block;
+            width: calc(100% - 4rem);
+            margin: 0 2rem 2rem 2rem;
+            padding: 1rem;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .btn-logout:hover {
+            background-color: #c82333;
+        }
+        
+        .footer {
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            color: #666;
+        }
+        
+        .footer span {
+            color: #0066cc;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">📰 NewsPortal</div>
+        <div class="nav-links">
+            <a href="/">Новости</a>
+            <a href="/register">Регистрация</a>
+            <a href="/profile" class="active">Профиль</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar">👤</div>
+                <h2>{{ user.username }}</h2>
+                <p>Личный кабинет</p>
+            </div>
+            
+            <div class="profile-info">
+                <div class="info-item">
+                    <div class="info-label">ID:</div>
+                    <div class="info-value">{{ user.id }}</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Имя:</div>
+                    <div class="info-value">{{ user.username }}</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Email:</div>
+                    <div class="info-value">{{ user.email }}</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Пароль:</div>
+                    <div class="info-value password">{{ user.password }}</div>
+                </div>
+            </div>
+            
+            <a href="/register" class="btn-logout">Выйти</a>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>© 2024 <span>NewsPortal</span>. Все права защищены.</p>
+    </footer>
+</body>
+</html>
