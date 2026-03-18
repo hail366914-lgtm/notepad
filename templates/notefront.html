@@ -335,56 +335,176 @@
 
             try {
                 const response = await fetch('/api/books', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ title, author })
-                });
-
-                if (response.ok) {
-                    showMessage(' Книга успешно добавлена!', 'success');
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1000);
-                } else {
-                    const error = await response.json();
-                    showMessage(error.message || ' Ошибка при добавлении', 'error');
-                }
-            } catch (error) {
-                console.error('Ошибка:', error);
-                showMessage('Ошибка при добавлении книги', 'error');
-            }
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новостной портал</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        function showMessage(text, type) {
-            const messageDiv = document.getElementById('message');
-            messageDiv.textContent = text;
-            messageDiv.className = type === 'success' ? 'message-success' : 'message-error';
-            messageDiv.style.display = 'block';
-
-            setTimeout(() => {
-                messageDiv.style.display = 'none';
-            }, 3000);
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
         }
-
-        // Добавляем возможность добавления по Enter
-        document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const inputs = ['title', 'author'];
-                const activeElement = document.activeElement;
-
-                if (inputs.includes(activeElement.id)) {
-                    const nextIndex = inputs.indexOf(activeElement.id) + 1;
-                    if (nextIndex < inputs.length) {
-                        document.getElementById(inputs[nextIndex]).focus();
-                    } else {
-                        addBook();
-                    }
-                }
-            }
-        });
-    </script>
+        
+        .navbar {
+            background-color: #ffffff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #0066cc;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0066cc;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            color: #0066cc;
+            background-color: #f0f7ff;
+        }
+        
+        .nav-links a.active {
+            color: #0066cc;
+            background-color: #f0f7ff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        h1 {
+            color: #0066cc;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .news-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,102,204,0.1);
+            border-color: #0066cc;
+        }
+        
+        .news-header {
+            background: linear-gradient(135deg, #0066cc, #004d99);
+            color: white;
+            padding: 1rem;
+        }
+        
+        .news-header h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .category {
+            background-color: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .news-content {
+            padding: 1.5rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            color: #666;
+        }
+        
+        .footer span {
+            color: #0066cc;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">📰 NewsPortal</div>
+        <div class="nav-links">
+            <a href="/" class="active">Новости</a>
+            <a href="/register">Регистрация</a>
+            <a href="/profile?username=admin&password=admin123">Профиль</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h1>Последние новости</h1>
+        
+        <div class="news-grid">
+            {% for item in news %}
+            <div class="news-card">
+                <div class="news-header">
+                    <h3>{{ item.title }}</h3>
+                    <div class="news-meta">
+                        <span class="category">{{ item.category }}</span>
+                        <span>{{ item.date }}</span>
+                    </div>
+                </div>
+                <div class="news-content">
+                    {{ item.content }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>© 2024 <span>NewsPortal</span>. Все права защищены.</p>
+    </footer>
 </body>
-
 </html>
