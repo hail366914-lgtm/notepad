@@ -1,346 +1,9 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Библиотека - Главная</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            background-color: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        h2 {
-            color: #333;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-            margin-top: 0;
-            font-size: 28px;
-        }
-
-        h3 {
-            color: #555;
-            margin-top: 25px;
-            font-size: 20px;
-        }
-
-        .nav-links {
-            margin-bottom: 25px;
-            padding: 15px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 10px;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-links a:first-child {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .nav-links a:last-child {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .nav-links a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .add-book-section {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-            padding: 25px;
-            border-radius: 12px;
-            margin: 25px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .input-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin: 15px 0;
-        }
-
-        input {
-            flex: 1;
-            min-width: 200px;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s;
-            background-color: white;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        input::placeholder {
-            color: #aaa;
-        }
-
-        button {
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: bold;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
-        }
-
-        .books-container {
-            margin: 25px 0;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 12px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .book-card {
-            background: white;border-radius: 10px;
-            padding: 15px 20px;
-            margin: 12px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-            border-left: 5px solid #667eea;
-        }
-
-        .book-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .book-info {
-            flex-grow: 1;
-        }
-
-        .book-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .book-author {
-            color: #666;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .book-author::before {
-            content: "✍";
-            font-size: 14px;
-        }
-
-        .book-id {
-            background-color: #e9ecef;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #666;
-            display: inline-block;
-            margin-top: 5px;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: #999;
-            font-style: italic;
-            font-size: 16px;
-        }
-
-        .empty-state::before {
-            content: "";
-            display: block;
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        #message {
-            margin: 15px 0;
-            padding: 12px;
-            border-radius: 8px;
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .message-success {
-            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .message-error {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .stats {
-            margin-top: 15px;
-            padding: 10px;
-            background-color: #e9ecef;
-            border-radius: 8px;
-            color: #495057;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .stats span {
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        @media (max-width: 600px) {
-            .input-group {
-                flex-direction: column;
-            }
-
-            .nav-links {
-                flex-direction: column;
-            }
-
-            .book-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-
-            .book-id {
-                margin-top: 10px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2> Библиотека</h2>
-
-        <div class="nav-links">
-            <a href="http://127.0.0.1:8000/">
-                <span></span> Главная страница
-            </a>
-            <a href="/del" target="_blank">
-                <span></span> Страница удаления книг
-            </a>
-        </div><div class="add-book-section">
-            <h3> Добавить новую книгу</h3>
-            <div class="input-group">
-                <input type="text" id="title" placeholder="Название книги" autocomplete="off">
-                <input type="text" id="author" placeholder="Автор книги" autocomplete="off">
-                <button onclick="addBook()">
-                    <span></span> Добавить книгу
-                </button>
-            </div>
-        </div>
-
-        <div class="books-container">
-            <h3>Список книг</h3>
-            <div id="booksList">
-                {% if books %}
-                    {% for book in books %}
-                    <div class="book-card">
-                        <div class="book-info">
-                            <div class="book-title">{{ book.title }}</div>
-                            <div class="book-author">{{ book.author }}</div>
-                            <span class="book-id">ID: {{ book.id }}</span>
-                        </div>
-                    </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="empty-state">
-                        В библиотеке пока нет книг
-                    </div>
-                {% endif %}
-            </div>
-
-            <div class="stats">
-                Всего книг в библиотеке: <span>{{ books|length }}</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="message"></div>
-
-    <script>
-        async function addBook() {
-            const title = document.getElementById('title').value.trim();
-            const author = document.getElementById('author').value.trim();
-
-            if (!title || !author) {
-                showMessage(' Заполните все поля', 'error');
-                return;
-            }
-
-            try {
-                const response = await fetch('/api/books', {
-<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Новостной портал</title>
+    <title>Регистрация - NewsPortal</title>
     <style>
         * {
             margin: 0;
@@ -389,72 +52,118 @@
             background-color: #f0f7ff;
         }
         
-        .nav-links a.active {
-            color: #0066cc;
-            background-color: #f0f7ff;
-        }
-        
         .container {
-            max-width: 1200px;
-            margin: 2rem auto;
+            max-width: 500px;
+            margin: 3rem auto;
             padding: 0 2rem;
         }
         
-        h1 {
-            color: #0066cc;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-        }
-        
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        
-        .news-card {
+        .register-card {
             background-color: white;
             border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid #e0e0e0;
         }
         
-        .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,102,204,0.1);
-            border-color: #0066cc;
-        }
-        
-        .news-header {
+        .register-header {
             background: linear-gradient(135deg, #0066cc, #004d99);
             color: white;
-            padding: 1rem;
+            padding: 2rem;
+            text-align: center;
         }
         
-        .news-header h3 {
-            font-size: 1.2rem;
+        .register-header h2 {
+            font-size: 1.8rem;
             margin-bottom: 0.5rem;
         }
         
-        .news-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
+        .register-header p {
             opacity: 0.9;
+            font-size: 0.95rem;
         }
         
-        .category {
-            background-color: rgba(255,255,255,0.2);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
+        .register-form {
+            padding: 2rem;
         }
         
-        .news-content {
-            padding: 1.5rem;
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
             color: #555;
-            line-height: 1.6;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+        
+        .btn-register {
+            width: 100%;
+            padding: 1rem;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-register:hover {
+            background-color: #004d99;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #666;
+        }
+        
+        .login-link a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .message {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
         }
         
         .footer {
@@ -476,35 +185,89 @@
     <nav class="navbar">
         <div class="logo">📰 NewsPortal</div>
         <div class="nav-links">
-            <a href="/" class="active">Новости</a>
-            <a href="/register">Регистрация</a>
-            <a href="/profile?username=admin&password=admin123">Профиль</a>
+            <a href="/">Новости</a>
+            <a href="/register" class="active">Регистрация</a>
+            <a href="/profile">Профиль</a>
         </div>
     </nav>
     
     <div class="container">
-        <h1>Последние новости</h1>
-        
-        <div class="news-grid">
-            {% for item in news %}
-            <div class="news-card">
-                <div class="news-header">
-                    <h3>{{ item.title }}</h3>
-                    <div class="news-meta">
-                        <span class="category">{{ item.category }}</span>
-                        <span>{{ item.date }}</span>
+        <div class="register-card">
+            <div class="register-header">
+                <h2>Регистрация</h2>
+                <p>Создайте аккаунт для доступа к новостям</p>
+            </div>
+            
+            <div class="register-form">
+                <div id="message" class="message"></div>
+                
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="username">Имя пользователя</label>
+                        <input type="text" id="username" name="username" required>
                     </div>
-                </div>
-                <div class="news-content">
-                    {{ item.content }}
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-register">Зарегистрироваться</button>
+                </form>
+                
+                <div class="login-link">
+                    Уже есть аккаунт? <a href="/profile">Войти</a>
                 </div>
             </div>
-            {% endfor %}
         </div>
     </div>
     
     <footer class="footer">
         <p>© 2024 <span>NewsPortal</span>. Все права защищены.</p>
     </footer>
+    
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            const messageDiv = document.getElementById('message');
+            
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    messageDiv.className = 'message success';
+                    messageDiv.textContent = 'Регистрация успешна! Перенаправление...';
+                    
+                    setTimeout(() => {
+                        window.location.href = `/profile?username=${username}&password=${password}`;
+                    }, 1500);
+                } else {
+                    messageDiv.className = 'message error';
+                    messageDiv.textContent = data.detail || 'Ошибка при регистрации';
+                }
+            } catch (error) {
+                messageDiv.className = 'message error';
+                messageDiv.textContent = 'Ошибка сервера';
+            }
+        });
+    </script>
 </body>
 </html>
